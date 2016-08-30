@@ -246,11 +246,6 @@ body {
     text-shadow: 2px 2px 0 #555;
 }
 
-@keyframes bounce {
-    to { transform: scale(1.2); }
-}
-
-
 .multiplier {
     margin-left: 20%;
     right: 40%;
@@ -261,13 +256,6 @@ body {
     width: 40px;
 }
 
-.baddie-total:after {
-    position: absolute;
-    right: -10px;    
-    content: url('images/30px-Coin_Stack.png');
-    visibility: hidden;
-}
-
 #grand-total-section {
     position: absolute;
     float: right;
@@ -275,8 +263,6 @@ body {
     right: 140px;
 
 }
-
-
 
 .affix {
     position: fixed !important;
@@ -311,102 +297,6 @@ body {
     float: left;
 }
 
-/*this class is added/removed by JavaScript to spin the
-background disk on a '+' button click*/
-.spin-disk {
-    animation: spin .8s linear both;
-    animation-iteration-count: infinite;
-}
-
-.baddie-gloat {
-    animation: baddieGloat linear .3s infinite;
-    transform-origin: 50% 70%;
-}
-
-.thumbnail {
-    perspective:300px;
-}
-.baddie-flip {
-    animation: baddieFlip ease .4s both infinite;
-    transform-origin: 50% 100%;
-}
-
-
-@keyframes baddieFlip {
-    0% {
-            transform: rotateX(0deg);
-    }
-    50% {
-            transform: rotateX(80deg);
-    }
-    100% {
-            transform: rotateX(0deg);
-    }
-}
-
-@keyframes baddieGloat {
-    
-    50% {
-        transform: scale(1.17);
-    }
-    
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-@keyframes spin {
-    0% {
-        transform: rotate(0turn);
-                /*transform: scale(1);*/
-    }
-    50% {
-        transform:  rotate(.5turn);
-        /*transform: scale(1.05);*/
-    }
-    100% {
-        transform: rotate(1turn);
-        /*transform: scale(1);*/
-    }
-}
-
-.press-button {
-    animation: pressButton .2s ease-out both infinite;
-}
-
-@keyframes pressButton {
-    0% {
-        transform: translateY(0);
-          box-shadow: -1px 8px 0 1px black;
-    }
-
-    50% { transform: translateY(12px);
-          box-shadow: 0px 1px 0 0px black;
-    }
-    
-    100% { transform: translateY(0);
-           box-shadow: -1px 8px 0 1px black;
-    }
-}
-
-.coinBounce {
-    animation: coinBounce .3s ease-in infinite;
-    transform-origin: 55% 100%;
-
-}
-
-@keyframes coinBounce {
-    10% {
-            transform:scaleY(.6);
-    }
-    50% {
-            transform: translateY(-20px)
-    }
-    100% {
-        transform: scaleY(1);
-    }
-}
 
 .footer {
     padding: 10px !important;
@@ -449,41 +339,109 @@ address {
 }
 
 
-#hammer {
-    position: absolute;
-    float: left;
-    top: 160px;
-    left: 20px;
-    width: 210px;
-    display: none;
+/*
+================================
+================================
+==                            ==
+==      Animations            ==
+==                            ==
+================================
+================================
+
+***********
+    animation classes added/removed by JavaScript to create visual 
+    effects on various elements when the onscreen buttons are pressed.
+**********
+*/
+
+.spin-disk {
+    animation: spinDisk .8s linear;
 }
 
-.hammer{
-    display: inline !important;
-    animation: hammerSmash .2s ease 1;
-    animation-direction: normal, reverse;
+.baddie-smash {
+    animation: baddieSmash ease .4s;
+    transform-origin: 50% 100%;
 }
 
+.press-button {
+    animation: pressButton .26s ease-out both;
+}
 
+.coinBounce {
+    animation: coinBounce 0.3s ease-in;
+    transform-origin: 55% 100%;
+}
+.baddie-gloat {
+    animation: baddieGloat ease-in-out .3s;
+    animation-iteration-count: 1;
+    transform-origin: 50% 70%;
+}
 
-@keyframes hammerSmash {
+@keyframes spinDisk {
     0% {
-          opacity: 0;  
+        transform: rotate(0turn);
+                /*transform: scale(1);*/
     }
-    20% {
-        opacity: .4;
-    }
-    40% {
-            opacity: 1;
-    }
-    60% {
-            transform: translateY(200px)
-            rotate(30deg);
-            opacity: 1;
+    50% {
+        transform:  rotate(.5turn);
+        /*transform: scale(1.05);*/
     }
     100% {
-            transform: translateY(200px)
-            rotate(30deg);
-            opacity: 1;
+        transform: rotate(1turn);
+        /*transform: scale(1);*/
+    }
+}
+
+@keyframes baddieSmash {
+    0% {
+            transform: scaleX(1)
+            scaleY(1);
+    }
+    50% {
+            transform: scaleX(2)
+            scaleY(.02);
+    }
+    100% {
+            transform: scaleX(1)
+            scaleY(1);
+    }
+}
+
+@keyframes pressButton {
+    0% {
+        transform: translateY(0);
+          box-shadow: -1px 8px 0 1px black;
+    }
+
+    50% { transform: translateY(12px);
+          box-shadow: 0px 1px 0 0px black;
+    }
+    
+    100% { transform: translateY(0);
+           box-shadow: -1px 8px 0 1px black;
+    }
+}
+
+@keyframes coinBounce {
+    10% {
+            transform: scaleY(.4);
+    }
+    50% {
+            transform: translateY(-20px)
+            scaleX(.5);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes baddieGloat {
+    
+    50% {
+        transform: scale(1.17);
+    }
+    
+    100% {
+        transform: scale(1);
     }
 }

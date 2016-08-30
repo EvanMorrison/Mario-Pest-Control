@@ -79,62 +79,52 @@ $('input').keyup(function(e) {
 //Handle if a 'plus' or 'minus' button is clicked on the screen
 $( '.btn-plus' ).click(function() {
     var thisInput = $(this).siblings('input');
-    //increment number once on mouseclick
+    //increment number of coins for the related baddie once on each click on the onscreen '+' button
     coinChange(true, thisInput, $(thisInput).val());
     playSound('coin');
     
     //animate the '+' button press
     $(this).addClass('press-button');
-    setTimeout(function() {
-        $('.input-group-addon').removeClass('press-button');
-    }, 50);
-
 
     //bounce the coin
     var thisCoinImg = $(thisInput).closest('.list-group').find('img');
     $(thisCoinImg).addClass('coinBounce');
-    setTimeout(function() {
-        $(thisInput).closest('.list-group').find('img').removeClass('coinBounce');
-    }, 500);
+
+    //squish the baddie image
+    $(thisInput).closest('.thumbnail').find('.baddie-thumb').addClass('baddie-smash');
     
-    //spin the baddie image
-    $(thisInput).closest('.thumbnail').find('.baddie-thumb').addClass('baddie-flip');
+    //spin the background of the Total Coins 
+    $('#grand-total-background').addClass('spin-disk');
+    $('.spin-disk').css({animationIterationCount : 'infinite'});
+    
+    //clear the animation classes
     setTimeout(function() {
-        $(thisInput).closest('.thumbnail').find('.baddie-thumb').removeClass('baddie-flip');
+        $('.input-group-addon').removeClass('press-button');
+        $(thisInput).closest('.list-group').find('img').removeClass('coinBounce');
+        $(thisInput).closest('.thumbnail').find('.baddie-thumb').removeClass('baddie-smash');
+        $('#grand-total-background').removeClass('spin-disk');
     }, 300);
 
-    /*//hammerSmash
-    $('#hammer').addClass('hammer');
-    setTimeout(function() {
-        $('#hammer').removeClass('hammer');
-    }, 250);*/
-
-
-    //spin the background of the Total Coins once for a click on a plus button
-    $('#grand-total-background').addClass('spin-disk');
-    setTimeout(function() {
-        $('#grand-total-background').removeClass('spin-disk');
-    }, 800);
-
-    
 });
     
 $( '.btn-minus' ).click(function() {
     var thisInput = $(this).siblings('input');
-    //increment number once on mouseclick
+    //decrease number of coins by one on each click on the onscreen '-' button
     coinChange(false, thisInput, $(thisInput).val());
     playSound('minusCoin');
 
     //animate the button press
     $(this).addClass('press-button');
-    setTimeout(function() {
-    $('.input-group-addon').removeClass('press-button');
-    }, 50);
+    
     //animation for baddie thumbnail img when losing coins
     $(thisInput).closest('.thumbnail').find('.baddie-thumb').addClass('baddie-gloat');
+
+    //clear the animation classes
     setTimeout(function() {
+        $('.input-group-addon').removeClass('press-button');
         $(thisInput).closest('.thumbnail').find('.baddie-thumb').removeClass('baddie-gloat');
-    }, 300);
+    }, 150);
+    
 });
 
 
@@ -151,14 +141,20 @@ $( '.btn-plus' ).mousedown(function() {
 
     //spin the background of the Total Coins once for a click on a plus button
     $('#grand-total-background').addClass('spin-disk');
+    $('.spin-disk').css({ animationIterationCount : 'infinite'});
+    
     //make the button press repeatedly
     $(this).addClass('press-button');
+    $('.press-button').css({ animationIterationCount : 'infinite'});
+    
     //bounce the coin
     var thisCoinImg = $(thisInput).closest('.list-group').find('img');
     $(thisCoinImg).addClass('coinBounce');
-    //spin the baddie image
-    $(this).closest('.thumbnail').find('.baddie-thumb').addClass('baddie-flip');
-    
+    $('.coinBounce').css({ animationIterationCount : 'infinite'});
+
+    //smash the baddie image
+    $(this).closest('.thumbnail').find('.baddie-thumb').addClass('baddie-smash');
+    $('.baddie-smash').css({ animationIterationCount : 'infinite'});
     
 });
 
@@ -167,22 +163,27 @@ $( '.btn-minus' ).mousedown(function() {
     myIntervalID = setInterval(function() {
             coinChange(false, thisInput, $(thisInput).val());
             playSound('minusCoin');
+
         }, 150);
 
+    //make the button press repeat during hold-down
     $(this).addClass('press-button');
+    $('.press-button').css({ animationIterationCount : 'infinite'});
 
     $(thisInput).closest('.thumbnail').find('.baddie-thumb').addClass('baddie-gloat');
+    $('.baddie-gloat').css({ animationIterationCount : 'infinite'});
+
 });
 
+var myInterval
 
 //cancel continuous incrementing after mouse button is released or mouse leaves the button area
 $( '.btn-plus' ).on('mouseup mouseout ondragstart', function(){
     clearInterval(myIntervalID);
     $('#grand-total-background').removeClass('spin-disk');
-
     $(this).removeClass('press-button');
     $(this).closest('.list-group').find('img').removeClass('coinBounce');
-    $(this).closest('.thumbnail').find('.baddie-thumb').removeClass('class name')('baddie-flip');
+    $(this).closest('.thumbnail').find('.baddie-thumb').removeClass('baddie-smash');
     return false;
 });
     
@@ -194,7 +195,7 @@ $( '.btn-minus' ).on('mouseup mouseout ondragstart', function(){
 });
     
     
-
+//increase or decrease the number of baddies caught
 function coinChange (isCoinUp, whichInput, value) {
     if (isCoinUp) {
         value ++;
@@ -211,9 +212,11 @@ function coinChange (isCoinUp, whichInput, value) {
 }
     
     
-    
+  //refresh the coin totals on the page  
 setTotals();
 
+
+//lock the poisition of the Total Coins element once it is scrolled to the top of the window
 $(window).on('scroll', function() {
     if (($(window).width() <= 685) && ($(this).scrollTop() >=274)) {
         $('#grand-total-section').addClass('affix');
@@ -301,7 +304,7 @@ $(window).on('scroll', function() {
             $('.green').css({color: '#78ea2c'});
             $('.yellow').css({color: '#fecb51'});
             $('.blue').css({color: '#5c9dff'});
-            $('.red-background').css({backgroundColor : '#eb1f22'});
+            $('.red-background').css({backgroundColor : 'red'});
             $('.yellow-border').css({borderColor: 'yellow'});
 
 
