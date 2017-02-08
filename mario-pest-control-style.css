@@ -148,7 +148,7 @@ body {
 .jumbotron {
     margin: 0px;
     background-color: #555 !important;
-    background: url("http://imgur.com/ak5WkII.png");
+    background: url(images/mario-enemies-900x603.png);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -347,7 +347,6 @@ address {
 ==                            ==
 ================================
 ================================
-
 ***********
     animation classes added/removed by JavaScript to create visual 
     effects on various elements when the onscreen buttons are pressed.

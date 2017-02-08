@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
 var goombaCaught = $( '#goombas-caught');
@@ -28,18 +27,13 @@ function setTotals() {
 }
 
 /*
-
 HANDLE INPUT SECTION
-
 ALLOW user to increase or decrease the number of any baddies caught by
 CLICKING on the + or - buttons, or with the KEYBOARD (while the focus is 
 in the input box) by either ARROW UP or ARROW DOWN or by TYPING NUMBERS.
-
 DO NOT ALLOW non-number characters to be entered.
-
 CONTINUOUSLY increase or decrease the value if the MOUSE BUTTON is held
 down while over the + or - buttons (the up/down arrow keys also do this).  
-
 */
     
 //handle direct keyboard input of number
