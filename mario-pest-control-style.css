@@ -148,7 +148,7 @@ body {
 .jumbotron {
     margin: 0px;
     background-color: #555 !important;
-    background: url(images/mario-enemies-900x603.png);
+    background: url("http://imgur.com/ak5WkII.png");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
