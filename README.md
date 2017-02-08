@@ -1,3 +1,10 @@
-$ Mario-JQuery-Pest-Control
+# Mario Pest Control
 
-This is an extension of the Mario Pest Control project, this time using JQuery commands, CSS animations, Sound effects, and a "Light/Dark" mode button that toggles the appearance between a dark and light theme.
+Website with animations and sound to gamify tracking Mario's
+"earnings" from eliminating various pests.
+
+The site is made responsive using Bootstrap, animated with CSS3 
+keyframes, and uses jQuery to capture user mouse and keyboard inputs,calculate real-time coin totals, and animate the buttons, baddies, and totals. 
+
+A light/dark mode button is also included to toggle the overall
+color theme of the page. 
